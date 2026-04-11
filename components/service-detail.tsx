@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface ServiceDetailProps {
   title: string;
@@ -9,9 +10,6 @@ interface ServiceDetailProps {
   investment: string;
   deliverables: string;
   description: string;
-  heroImage?: string;
-  secondaryImage?: string;
-  parallaxImage?: string;
   included: string[];
 }
 
@@ -21,127 +19,139 @@ export default function ServiceDetail({
   investment,
   deliverables,
   description,
-  heroImage = "https://picsum.photos/id/45/600/800",
-  secondaryImage = "https://picsum.photos/id/64/800/1200",
-  parallaxImage = "https://picsum.photos/id/22/1600/900",
   included
 }: ServiceDetailProps) {
   return (
-    <main className="bg-[#f2f0e8] text-[#1a1a1a] min-h-screen font-serif">
-      <section className="relative h-[70vh] flex flex-col items-center justify-center text-center px-4 border-b border-black/10">
-        <span className="text-[10px] tracking-[0.5em] uppercase font-sans mb-8">
+    <main className="bg-[#f2f0e8] text-[#1a1a1a] min-h-screen">
+      {/* HERO SECTION - ELEGANT TYPOGRAPHY */}
+      <section className="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+        <motion.span 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-[10px] tracking-[0.6em] uppercase font-livvic mb-8 text-stone-500"
+        >
           {category.replace("-", " ")}
-        </span>
-        <h1 className="text-6xl md:text-9xl uppercase tracking-tighter leading-none">
+        </motion.span>
+        
+        <motion.h1 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-7xl md:text-[12vw] font-soria leading-none tracking-tighter uppercase z-10"
+        >
           {title.split(" ")[0]} <br />
-          <span className="italic font-light lowercase">
-            {title.split(" ").slice(1).join(" ") || "Collection"}
-          </span>
-        </h1>
+          <span className="italic font-light lowercase opacity-80">{title.split(" ").slice(1).join(" ")}</span>
+        </motion.h1>
 
-        <div className="absolute right-10 bottom-[-50px] w-48 h-64 md:w-64 md:h-80 z-10 shadow-2xl transition-transform duration-1000 ease-out hover:scale-105">
+        {/* Floating Hero Image */}
+        <motion.div 
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="absolute bottom-[-10%] md:bottom-[-20%] right-[5%] md:right-[10%] w-64 h-80 md:w-[30vw] md:h-[40vw] z-0"
+        >
           <Image
-            src={heroImage}
+            src="https://picsum.photos/id/103/800/1200"
             fill
-            className="object-cover border-[12px] border-white"
-            alt={title}
+            className="object-cover grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl"
+            alt="Hero Visual"
           />
-        </div>
+        </motion.div>
       </section>
 
-      <section className="relative z-20 bg-[#f2f0e8] py-32 px-6 md:px-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <div className="lg:col-span-5 lg:sticky lg:top-24 h-fit">
-          <div className="relative aspect-[3/4] w-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">
-            <Image
-              src={secondaryImage}
-              fill
-              className="object-cover"
-              alt="Context image"
-            />
+      {/* STORYTELLING GRID - MULTIPLE PHOTOS */}
+      <section className="py-40 px-6 md:px-16 max-w-screen-2xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-20">
+          
+          {/* Left Side: Large Portrait & Small Detail */}
+          <div className="md:col-span-5 flex flex-col gap-20">
+            <div className="relative aspect-[3/4] w-full overflow-hidden shadow-xl">
+              <Image src="https://picsum.photos/id/111/800/1200" fill className="object-cover" alt="Detail 1" />
+            </div>
+            <div className="md:pl-20">
+              <div className="relative aspect-square w-full md:w-80 overflow-hidden shadow-lg">
+                <Image src="https://picsum.photos/id/120/600/600" fill className="object-cover grayscale" alt="Detail 2" />
+              </div>
+              <p className="mt-8 font-livvic text-[10px] uppercase tracking-[0.3em] text-stone-500 leading-loose">
+                Every frame is a curated memory, <br /> designed to be felt, not just seen.
+              </p>
+            </div>
           </div>
-          <p className="mt-6 text-[10px] tracking-[0.3em] uppercase font-sans text-stone-500">
-            Capturing the raw emotion of your day.
-          </p>
-        </div>
 
-        <div className="lg:col-span-7 flex flex-col justify-center">
-          <div className="max-w-xl">
-            <h2 className="text-4xl md:text-5xl mb-12 leading-tight">
-              {description}
-            </h2>
+          {/* Right Side: Text & Wide Image */}
+          <div className="md:col-span-7 flex flex-col justify-between">
+            <div className="max-w-xl mb-20 md:mb-0">
+              <h2 className="font-soria text-4xl md:text-6xl leading-tight mb-12">
+                {description}
+              </h2>
+              
+              <div className="space-y-16 pt-16 border-t border-black/10">
+                <div className="flex flex-col md:flex-row gap-8 md:gap-20">
+                   <div className="flex-1">
+                      <p className="text-[10px] tracking-widest uppercase mb-4 text-stone-400">Investment</p>
+                      <p className="text-3xl font-soria italic">{investment}</p>
+                   </div>
+                   <div className="flex-1">
+                      <p className="text-[10px] tracking-widest uppercase mb-4 text-stone-400">Deliverables</p>
+                      <p className="text-3xl font-soria italic">{deliverables}</p>
+                   </div>
+                </div>
 
-            <div className="space-y-12 border-t border-black/20 pt-12">
-              <DetailItem
-                title="Investment"
-                content={investment}
-                desc="Includes coverage, professional curation, and a private online gallery."
-              />
-              <DetailItem
-                title="The Deliverables"
-                content={deliverables}
-                desc="Carefully edited high-resolution images delivered via digital download."
-              />
-              <DetailItem
-                title="Feelm Notes"
-                content="Storytelling"
-                desc="Every frame is picked to tell the unique tale of your connection."
-              />
+                <div>
+                   <p className="text-[10px] tracking-widest uppercase mb-8 text-stone-400">What’s Included</p>
+                   <div className="grid grid-cols-2 gap-y-4">
+                      {included.map(item => (
+                        <p key={item} className="font-livvic text-[10px] uppercase tracking-wider">• {item}</p>
+                      ))}
+                   </div>
+                </div>
+              </div>
             </div>
 
-            <button className="mt-20 group relative overflow-hidden border border-black rounded-full px-16 py-5 uppercase text-[10px] tracking-[0.4em] hover:text-white transition-colors duration-500">
-              <span className="relative z-10">Inquire for Dates</span>
-              <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-            </button>
+            <div className="relative aspect-[16/9] w-full overflow-hidden shadow-2xl">
+              <Image src="https://picsum.photos/id/129/1200/800" fill className="object-cover" alt="Cinematic Wide" />
+            </div>
           </div>
         </div>
       </section>
 
-      <section
-        className="relative h-[60vh] md:h-[80vh] overflow-hidden bg-fixed bg-center bg-cover"
-        style={{ backgroundImage: `url('${parallaxImage}')` }}
-      >
-        <div className="absolute inset-0 bg-black/10"></div>
-      </section>
-
-      <section className="bg-white py-32 px-6 md:px-20 text-center">
-        <h3 className="text-[10px] tracking-[0.5em] uppercase font-sans mb-20 text-stone-400">
-          Everything you need
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto">
-          {included.map((item, i) => (
-            <div key={i} className="flex flex-col items-center">
-              <div className="w-[1px] h-12 bg-black/20 mb-6"></div>
-              <p className="uppercase text-sm tracking-widest">{item}</p>
-            </div>
-          ))}
+      {/* FULL WIDTH PARALLAX MOMENT */}
+      <section className="relative h-[80vh] w-full overflow-hidden">
+        <Image 
+          src="https://picsum.photos/id/133/1600/900" 
+          fill 
+          className="object-cover scale-110" 
+          alt="Parallax"
+          style={{ objectPosition: 'center 20%' }}
+        />
+        <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+          <p className="text-white font-soria italic text-4xl md:text-7xl">The beauty of the mundane.</p>
         </div>
       </section>
 
-      <section className="bg-[#1a1a1a] text-white py-40 px-6 text-center overflow-hidden">
-        <span className="text-[10px] tracking-[0.5em] uppercase text-stone-500 mb-10 block">
-          Looking for more?
-        </span>
-        <a href="/" className="group inline-block">
-          <h2 className="text-5xl md:text-8xl font-light hover:italic transition-all duration-700">
-            Back Home <span className="text-stone-600">→</span>
+      {/* CALL TO ACTION */}
+      <section className="py-40 bg-[#1a1a1a] text-white text-center px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[10px] tracking-[0.5em] uppercase text-stone-500 mb-10">Available for 2026/2027</p>
+          <h2 className="text-5xl md:text-8xl font-soria italic leading-none mb-16">
+            Let’s tell <br /> your tale together
           </h2>
-          <div className="h-[1px] w-0 group-hover:w-full bg-white transition-all duration-700"></div>
-        </a>
+          <button className="group relative px-20 py-6 border border-white/20 rounded-full overflow-hidden transition-all hover:border-white">
+            <span className="relative z-10 font-livvic text-[10px] uppercase tracking-[0.4em]">Get in Touch</span>
+            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
+          </button>
+          
+          <div className="mt-40 pt-20 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
+            <a href="/" className="font-soria text-2xl italic hover:opacity-50 transition-opacity">← Feelm Tales</a>
+            <div className="flex gap-10 text-[9px] uppercase tracking-widest text-stone-500">
+              <a href="#" className="hover:text-white transition-colors">Instagram</a>
+              <a href="#" className="hover:text-white transition-colors">Pinterest</a>
+              <a href="#" className="hover:text-white transition-colors">Email</a>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
-  );
-}
-
-function DetailItem({ title, content, desc }: { title: string; content: string; desc: string; }) {
-  return (
-    <div className="group">
-      <h4 className="text-[10px] tracking-[0.3em] uppercase font-sans text-stone-400 mb-2">
-        {title}
-      </h4>
-      <p className="text-2xl md:text-3xl font-normal mb-4">{content}</p>
-      <p className="text-stone-500 text-sm leading-relaxed font-sans font-light max-w-sm">
-        {desc}
-      </p>
-    </div>
   );
 }
