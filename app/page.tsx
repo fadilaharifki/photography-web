@@ -1,17 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { Menu, X, Mail, Instagram, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
-import AboutSection from "@/components/about-section";
-import ContactSection from "@/components/contact-section";
-import Footer from "@/components/footer";
 import QuoteSection from "@/components/quote-section";
 import WeddingShowcase from "@/components/wedding-showcase-section";
 import FeaturedProject from "@/components/future-project";
-import CategoryHero from "@/components/category-hero";
+import CategorySection from "@/components/category-section";
 
 export default function Home() {
   return (
@@ -20,7 +13,7 @@ export default function Home() {
         <HeroSection />
         <QuoteSection />
         <FeaturedProject />
-        <CategoryHero/>
+        <CategorySection/>
         <WeddingShowcase />
       </main>
     </div>

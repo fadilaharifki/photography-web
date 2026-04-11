@@ -3,40 +3,60 @@
 import React from "react";
 import Image from "next/image";
 
-export default function PackageDetail() {
+interface ServiceDetailProps {
+  title: string;
+  category: string;
+  investment: string;
+  deliverables: string;
+  description: string;
+  heroImage?: string;
+  secondaryImage?: string;
+  parallaxImage?: string;
+  included: string[];
+}
+
+export default function ServiceDetail({
+  title,
+  category,
+  investment,
+  deliverables,
+  description,
+  heroImage = "https://picsum.photos/id/45/600/800",
+  secondaryImage = "https://picsum.photos/id/64/800/1200",
+  parallaxImage = "https://picsum.photos/id/22/1600/900",
+  included
+}: ServiceDetailProps) {
   return (
     <main className="bg-[#f2f0e8] text-[#1a1a1a] min-h-screen font-serif">
-      {/* 1. HERO SECTION - STICKY TITLE EFFECT */}
       <section className="relative h-[70vh] flex flex-col items-center justify-center text-center px-4 border-b border-black/10">
         <span className="text-[10px] tracking-[0.5em] uppercase font-sans mb-8">
-          Package One
+          {category.replace("-", " ")}
         </span>
         <h1 className="text-6xl md:text-9xl uppercase tracking-tighter leading-none">
-          Wedding <br />
-          <span className="italic font-light lowercase">Collection</span>
+          {title.split(" ")[0]} <br />
+          <span className="italic font-light lowercase">
+            {title.split(" ").slice(1).join(" ") || "Collection"}
+          </span>
         </h1>
 
-        {/* Decorative Floating Image (Parallax Effect) */}
         <div className="absolute right-10 bottom-[-50px] w-48 h-64 md:w-64 md:h-80 z-10 shadow-2xl transition-transform duration-1000 ease-out hover:scale-105">
           <Image
-            src="https://picsum.photos/id/45/600/800"
+            src={heroImage}
             fill
             className="object-cover border-[12px] border-white"
-            alt="Wedding Detail"
+            alt={title}
           />
         </div>
       </section>
 
-      {/* 2. THE INVESTMENT & DETAILS */}
       <section className="relative z-20 bg-[#f2f0e8] py-32 px-6 md:px-20 grid grid-cols-1 lg:grid-cols-12 gap-16">
-        {/* Left Side: Sticky Image */}
         <div className="lg:col-span-5 lg:sticky lg:top-24 h-fit">
           <div className="relative aspect-[3/4] w-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">
             <Image
-              src="https://picsum.photos/id/64/800/1200"
+              src={secondaryImage}
               fill
               className="object-cover"
-              alt="The Couple"
+              alt="Context image"
             />
           </div>
           <p className="mt-6 text-[10px] tracking-[0.3em] uppercase font-sans text-stone-500">
@@ -44,29 +64,27 @@ export default function PackageDetail() {
           </p>
         </div>
 
-        {/* Right Side: Content */}
         <div className="lg:col-span-7 flex flex-col justify-center">
           <div className="max-w-xl">
             <h2 className="text-4xl md:text-5xl mb-12 leading-tight">
-              A full day of coverage <span className="italic">to</span> ensure
-              every <span className="italic">moment</span> is preserved forever.
+              {description}
             </h2>
 
             <div className="space-y-12 border-t border-black/20 pt-12">
               <DetailItem
                 title="Investment"
-                content="Starts at $4,500"
-                desc="Includes 8-10 hours of coverage, two photographers, and a private online gallery."
+                content={investment}
+                desc="Includes coverage, professional curation, and a private online gallery."
               />
               <DetailItem
                 title="The Deliverables"
-                content="600+ High Res Images"
-                desc="Carefully curated and professionally edited images delivered within 8 weeks."
+                content={deliverables}
+                desc="Carefully edited high-resolution images delivered via digital download."
               />
               <DetailItem
-                title="Add-Ons"
-                content="Film & Albums"
-                desc="Optional 35mm film coverage and custom heirloom wedding albums available."
+                title="Feelm Notes"
+                content="Storytelling"
+                desc="Every frame is picked to tell the unique tale of your connection."
               />
             </div>
 
@@ -78,29 +96,19 @@ export default function PackageDetail() {
         </div>
       </section>
 
-      {/* 3. PARALLAX IMAGE BREAK */}
       <section
         className="relative h-[60vh] md:h-[80vh] overflow-hidden bg-fixed bg-center bg-cover"
-        style={{
-          backgroundImage: `url('https://picsum.photos/id/22/1600/900')`,
-        }}
+        style={{ backgroundImage: `url('${parallaxImage}')` }}
       >
-        {/* Overlay tipis agar teks tetap terbaca */}
         <div className="absolute inset-0 bg-black/10"></div>
       </section>
 
-      {/* 4. WHAT'S INCLUDED GRID */}
       <section className="bg-white py-32 px-6 md:px-20 text-center">
         <h3 className="text-[10px] tracking-[0.5em] uppercase font-sans mb-20 text-stone-400">
           Everything you need
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto">
-          {[
-            "Timeline Assistance",
-            "Print Rights",
-            "High Res Files",
-            "Engagement Session",
-          ].map((item, i) => (
+          {included.map((item, i) => (
             <div key={i} className="flex flex-col items-center">
               <div className="w-[1px] h-12 bg-black/20 mb-6"></div>
               <p className="uppercase text-sm tracking-widest">{item}</p>
@@ -109,14 +117,13 @@ export default function PackageDetail() {
         </div>
       </section>
 
-      {/* 5. FOOTER / NEXT PACKAGE */}
       <section className="bg-[#1a1a1a] text-white py-40 px-6 text-center overflow-hidden">
         <span className="text-[10px] tracking-[0.5em] uppercase text-stone-500 mb-10 block">
           Looking for more?
         </span>
-        <a href="#" className="group inline-block">
+        <a href="/" className="group inline-block">
           <h2 className="text-5xl md:text-8xl font-light hover:italic transition-all duration-700">
-            Next Package <span className="text-stone-600">→</span>
+            Back Home <span className="text-stone-600">→</span>
           </h2>
           <div className="h-[1px] w-0 group-hover:w-full bg-white transition-all duration-700"></div>
         </a>
@@ -125,16 +132,7 @@ export default function PackageDetail() {
   );
 }
 
-// Sub-komponen untuk list detail
-function DetailItem({
-  title,
-  content,
-  desc,
-}: {
-  title: string;
-  content: string;
-  desc: string;
-}) {
+function DetailItem({ title, content, desc }: { title: string; content: string; desc: string; }) {
   return (
     <div className="group">
       <h4 className="text-[10px] tracking-[0.3em] uppercase font-sans text-stone-400 mb-2">
