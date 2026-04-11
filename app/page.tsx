@@ -10,6 +10,8 @@ import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 import QuoteSection from "@/components/quote-section";
 import WeddingShowcase from "@/components/wedding-showcase-section";
+import FeaturedProject from "@/components/future-project";
+import CategoryHero from "@/components/category-hero";
 
 export default function Home() {
   return (
@@ -17,7 +19,8 @@ export default function Home() {
       <main>
         <HeroSection />
         <QuoteSection />
-        <AboutSection />
+        <FeaturedProject />
+        <CategoryHero/>
         <WeddingShowcase />
       </main>
     </div>
