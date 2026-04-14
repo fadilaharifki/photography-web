@@ -59,9 +59,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function PackageDetailPage({ params }: PageProps) {
   const { category } = await params;
 
-  console.log(params,'params');
-  
-
   if (!category) {
     notFound();
   }

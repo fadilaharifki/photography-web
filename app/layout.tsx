@@ -4,6 +4,7 @@ import localFont from "next/font/local"; // Ganti Poppins ke localFont
 import "./globals.css";
 import Footer from "@/components/footer";
 import Navigation from "@/components/navigation";
+import SmoothScroll from "@/components/smooth-scroll";
 
 // Konfigurasi Livvic sebagai font utama
 const livvic = localFont({
@@ -93,10 +94,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${livvic.variable} ${soria.variable} ${livvic.className} antialiased`}>
-        <Navigation />
-        <main>{children}</main>
-        <Analytics />
-        <Footer />
+        <SmoothScroll>
+          <Navigation />
+          <main>{children}</main>
+          <Analytics />
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

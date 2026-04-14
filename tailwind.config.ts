@@ -7,8 +7,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        livvic: ["var(--font-livvic)", "sans-serif"],
-        soria: ["var(--font-soria)", "serif"],
+        livvic: ["var(--font-livvic)"],
+        soria: ["var(--font-soria)"],
       },
     },
   },

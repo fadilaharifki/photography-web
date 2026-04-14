@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
+import { useLenis } from "lenis/react";
 
 const slides = [
   {
@@ -21,6 +22,7 @@ const slides = [
 ];
 
 export default function SplitHeroSection() {
+  const lenis = useLenis();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   useEffect(() => {
@@ -31,15 +33,16 @@ export default function SplitHeroSection() {
   }, []);
 
   const scrollToNextSection = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
-    });
-  };
+      lenis?.scrollTo(window.innerHeight, {
+        duration: 2.5, 
+        lerp: 0.02, 
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      });
+    };
 
   return (
     <section className="relative h-screen w-full flex flex-col md:flex-row bg-[#0a0a0a] overflow-hidden">
-      <div className="relative w-full md:w-1/2 h-1/2 md:h-full overflow-hidden border-r border-white/10">
+      <div className="relative w-full md:w-1/2 h-1/2 md:h-full overflow-hidden">
         <Image
           src="https://picsum.photos/id/65/1200/1600"
           alt="Feelm Tales Static"
