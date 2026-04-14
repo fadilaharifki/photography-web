@@ -11,9 +11,9 @@ export const CATEGORY_DATA = {
     title: "The Beginning",
     href: "/the-beginning",
     description: "Abadikan momen awal perjalanan cinta...",
-    services: ["Prewedding", "Engagement"], 
+    services: ["Prewedding", "Engagement"],
     image: "https://picsum.photos/id/103/1200/630",
-    showInNav: true, 
+    showInNav: true,
   },
   "the-union": {
     title: "The Union",
@@ -37,6 +37,6 @@ export const CATEGORY_DATA = {
     description: "Let's start your tale...",
     services: [],
     image: "https://picsum.photos/id/101/1200/630",
-    showInNav: false, 
+    showInNav: false,
   },
 } as const;

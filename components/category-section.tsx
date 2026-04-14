@@ -90,59 +90,59 @@ export default function CategorySection() {
           </h2>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {SERVICES.map((service) => (
-            <div
-              key={service.slug}
-              onMouseEnter={() => setActiveService(service)}
-              onMouseLeave={() => setActiveService(null)}
-              className="relative aspect-[3/4.5] rounded-2xl overflow-hidden group"
-            >
-              <div className="absolute inset-0 z-0">
-                <Image
-                  src={service.bgImage}
-                  alt={service.title}
-                  fill
-                  className="object-cover transition-all duration-[1.5s] ease-out scale-100 group-hover:scale-110 grayscale-[0.8] group-hover:grayscale-0 opacity-40 group-hover:opacity-100"
-                />
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {SERVICES.map((service) => (
+    <div
+      key={service.slug}
+      onMouseEnter={() => setActiveService(service)}
+      onMouseLeave={() => setActiveService(null)}
+      className="relative aspect-[3/4.5] rounded-2xl overflow-hidden group"
+    >
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={service.bgImage}
+          alt={service.title}
+          fill
+          className="object-cover transition-all duration-[1.5s] ease-out scale-100 group-hover:scale-110 grayscale-0 opacity-100"
+        />
+        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      </div>
 
-              <Link
-                href={`/${service.slug}`}
-                className="relative flex flex-col justify-end items-center w-full h-full p-10 z-10"
+      <Link
+        href={`/${service.slug}`}
+        className="relative flex flex-col justify-end items-center w-full h-full p-10 z-10"
+      >
+        <h3 className="text-xl md:text-2xl font-soria italic tracking-tight mb-4 text-white drop-shadow-md transition-colors duration-500">
+          {service.title}
+        </h3>
+
+        <div className="h-10 flex flex-col items-center justify-start overflow-hidden">
+          <AnimatePresence>
+            {activeService?.slug === service.slug && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col gap-1 items-center"
               >
-                <h3 className="text-xl md:text-2xl font-soria italic tracking-tight mb-4 text-stone-800 group-hover:text-white transition-colors duration-500">
-                  {service.title}
-                </h3>
-
-                <div className="h-10 flex flex-col items-center justify-start overflow-hidden">
-                  <AnimatePresence>
-                    {activeService?.slug === service.slug && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.4 }}
-                        className="flex flex-col gap-1 items-center"
-                      >
-                        {service.subs.map((sub) => (
-                          <p
-                            key={sub}
-                            className="text-[9px] font-medium tracking-[0.2em] uppercase text-white/80"
-                          >
-                            {sub}
-                          </p>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </Link>
-            </div>
-          ))}
+                {service.subs.map((sub) => (
+                  <p
+                    key={sub}
+                    className="text-[9px] font-medium tracking-[0.2em] uppercase text-white/80"
+                  >
+                    {sub}
+                  </p>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
+      </Link>
+    </div>
+  ))}
+</div>
       </div>
     </section>
   );

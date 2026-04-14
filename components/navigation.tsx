@@ -66,12 +66,12 @@ export default function Navigation() {
                 {link.clickable ? (
                   <Link 
                     href={link.href} 
-                    className="text-xs uppercase tracking-[0.15em] font-semibold flex items-center gap-1.5 transition-all py-2 hover:font-soria hover:scale-110 origin-center"
+                    className="text-xs uppercase tracking-[0.15em] font-semibold flex items-center gap-1.5 transition-all py-2 hover:scale-110 origin-center"
                   >
                     {link.label}
                   </Link>
                 ) : (
-                  <div className="text-xs uppercase tracking-[0.15em] font-semibold flex items-center gap-1.5 cursor-default py-2 transition-all hover:font-soria">
+                  <div className="text-xs uppercase tracking-[0.15em] font-semibold flex items-center gap-1.5 cursor-default py-2 transition-all">
                     {link.label}
                     {link.subItems && <ChevronDown size={12} className={`opacity-40 transition-transform duration-300 ${activeSubmenu === link.label ? "rotate-180" : ""}`} />}
                   </div>
@@ -90,7 +90,7 @@ export default function Navigation() {
                           <div key={sub.label} className="group/sub">
                             <Link 
                               href={sub.href} 
-                              className="block w-full px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-xl transition-all hover:bg-black/5 hover:font-soria text-black text-center origin-center hover:scale-105"
+                              className="block w-full px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-xl transition-all hover:bg-black/5 text-black text-center origin-center hover:scale-105"
                             >
                               {sub.label}
                             </Link>

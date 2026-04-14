@@ -92,30 +92,33 @@ export default function Details({ title, description, services, category }: Deta
       />
 
       <section className="relative w-full h-[400vh]">
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          {editorialImages.map((img, index) => {
-            const y = useTransform(scrollYProgress, [0, 1], [0, img.speed]);
-            return (
-              <motion.div
-                key={index}
-                style={{ y, top: img.top, left: img.left || "auto", right: img.right || "auto" }}
-                className="absolute aspect-3/4 shadow-2xl z-0 cursor-pointer"
-                onClick={() => setSelectedImgIndex(index)}
-              >
-                <div className={`relative ${img.size} aspect-3/4 group`}>
-                  <Image
-                    src={`https://picsum.photos/id/${img.id}/600/800`}
-                    alt=""
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    style={{ transform: `rotate(${img.rotate}deg)` }}
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                </div>
-              </motion.div>
-            );
-          })}
+     <div className="absolute inset-0 z-0 overflow-hidden">
+  {editorialImages.map((img, index) => {
+    return (
+      <motion.div
+        key={index}
+        style={{ 
+          top: img.top, 
+          left: img.left || "auto", 
+          right: img.right || "auto",
+          transform: `rotate(${img.rotate}deg)` 
+        }}
+        className="absolute aspect-3/4 shadow-2xl z-0 cursor-pointer"
+        onClick={() => setSelectedImgIndex(index)}
+      >
+        <div className={`relative ${img.size} aspect-3/4 group overflow-hidden`}>
+          <Image
+            src={`https://picsum.photos/id/${img.id}/600/800`}
+            alt=""
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
         </div>
+      </motion.div>
+    );
+  })}
+</div>
 
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center z-50 pointer-events-none">
           <div className="text-center px-6 pointer-events-auto">

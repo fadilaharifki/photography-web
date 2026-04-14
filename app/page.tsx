@@ -14,7 +14,6 @@ export default function Home() {
         <QuoteSection />
         <FeaturedProject />
         <CategorySection/>
-        <WeddingShowcase />
       </main>
     </div>
   );

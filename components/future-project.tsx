@@ -18,8 +18,8 @@ export default function FeaturedProject() {
   const springConfig = { stiffness: 120, damping: 40, mass: 0.5 };
   const smoothProgress = useSpring(scrollYProgress, springConfig);
 
-  const yLeft = useTransform(smoothProgress, [0, 1], [-500, 500]);
-  const yRight = useTransform(smoothProgress, [0, 1], [500, -500]);
+  const yLeft = useTransform(smoothProgress, [0, 1], [-440, 1000]);
+  const yRight = useTransform(smoothProgress, [0, 1], [1000, -1300]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     setMousePos({ x: e.clientX, y: e.clientY });
