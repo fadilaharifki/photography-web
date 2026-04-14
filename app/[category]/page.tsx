@@ -1,33 +1,9 @@
 import Details from "@/components/details";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-
-const CATEGORY_DATA = {
-  "the-beginning": {
-    title: "Beginning",
-    description: "Abadikan momen awal perjalanan cinta melalui Pre-Wedding dan Tunangan.",
-    services: ["Pre-wedding", "Engagement"],
-    image: "https://picsum.photos/id/103/1200/630",
-  },
-  "the-union": {
-    title: "Union",
-    description: "Merayakan janji suci dan kebersamaan di hari pernikahan Anda.",
-    services: ["Wedding Day", "Holy Matrimony"],
-    image: "https://picsum.photos/id/111/1200/630",
-  },
-  "the-legacy": {
-    title: "Legacy",
-    description: "Menyimpan memori berharga mulai dari kelahiran hingga momen hangat keluarga.",
-    services: ["Maternity", "Newborn", "Family Portrait"],
-    image: "https://picsum.photos/id/115/1200/630",
-  },
-  backstory: {
-    title: "Backstory",
-    description: "Menceritakan kisah cinta Anda melalui dokumentasi perjalanan hubungan.",
-    services: [],
-    image: "https://picsum.photos/id/120/1200/630",
-  },
-};
+import BackstoryContent from "@/components/backstory-content";
+import ConnectContent from "@/components/connect-content";
+import { CATEGORY_DATA } from "@/constants/content";
 
 interface PageProps {
   params: Promise<{
@@ -37,13 +13,15 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { category } = await params;
-  const selectCategory = CATEGORY_DATA[category?.toLowerCase() as keyof typeof CATEGORY_DATA];
+  const categoryKey = category?.toLowerCase() as keyof typeof CATEGORY_DATA;
+  const selectCategory = CATEGORY_DATA[categoryKey];
 
   if (!selectCategory) {
-    return { title: "Package Not Found | Feelm Tales" };
+    return { title: "Page Not Found | Feelm Tales" };
   }
 
-  const fullTitle = `${selectCategory.title} Package | Feelm Tales`;
+  const fullTitle = `${selectCategory.title} — Feelm Tales`;
+
   return {
     title: fullTitle,
     description: selectCategory.description,
@@ -51,7 +29,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: fullTitle,
       description: selectCategory.description,
       siteName: "Feelm Tales",
+      url: `https://feelmtales.com${selectCategory.href}`,
+      type: "website",
       images: [{ url: selectCategory.image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: fullTitle,
+      description: selectCategory.description,
+      images: [selectCategory.image],
     },
   };
 }
@@ -70,12 +56,20 @@ export default async function PackageDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  if (categoryKey === "backstory") {
+    return <BackstoryContent />;
+  }
+
+  if (categoryKey === "connect") {
+    return <ConnectContent />;
+  }
+
   return (
     <Details 
       title={selectCategory.title} 
       description={selectCategory.description} 
-      services={selectCategory.services}
-      category={category}
+      services={[...selectCategory.services]}
+      category={categoryKey}
     />
   );
 }

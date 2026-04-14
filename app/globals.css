@@ -160,3 +160,16 @@ html.lenis, html.lenis body {
 ::-webkit-scrollbar-thumb:hover {
   background: oklch(0.5 0 0 / 0.4);
 }
+
+/* Sembunyikan spinner secara paksa */
+.nprogress-custom-parent #nprogress .spinner,
+#nprogress .spinner {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Pastikan hanya bar-nya yang muncul */
+#nprogress .bar {
+  background: #2D4030 !important;
+}

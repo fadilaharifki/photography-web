@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import localFont from "next/font/local"; // Ganti Poppins ke localFont
+import localFont from "next/font/local"; 
 import "./globals.css";
 import Footer from "@/components/footer";
 import Navigation from "@/components/navigation";
 import SmoothScroll from "@/components/smooth-scroll";
+import NextTopLoader from 'nextjs-toploader';
+import FooterWrapper from "@/components/footer-wrapper";
 
-// Konfigurasi Livvic sebagai font utama
 const livvic = localFont({
   src: [
     { path: "../assets/fonts/Livvic-Thin.ttf", weight: "100", style: "normal" },
@@ -17,7 +18,7 @@ const livvic = localFont({
     { path: "../assets/fonts/Livvic-SemiBold.ttf", weight: "600", style: "normal" },
     { path: "../assets/fonts/Livvic-Bold.ttf", weight: "700", style: "normal" },
     { path: "../assets/fonts/Livvic-Black.ttf", weight: "900", style: "normal" },
-    // Tambahkan Italic jika perlu
+
     { path: "../assets/fonts/Livvic-RegularItalic.ttf", weight: "400", style: "italic" },
   ],
   variable: "--font-livvic",
@@ -94,11 +95,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${livvic.variable} ${soria.variable} ${livvic.className} antialiased`}>
+      <NextTopLoader
+        color="#2D4030" 
+        initialPosition={0.08}
+        crawlSpeed={200}
+        height={3}
+        crawl={true}
+        showSpinner={false} 
+        easing="ease-in-out"
+        speed={300}
+        shadow="0 0 10px rgba(45, 64, 48, 0.5), 0 0 5px rgba(45, 64, 48, 0.3)"
+        template='<div class="bar" role="bar"><div class="peg"></div></div>'
+        zIndex={2000} 
+        showAtBottom={false}
+      />
         <SmoothScroll>
           <Navigation />
           <main>{children}</main>
           <Analytics />
-          <Footer />
+        <FooterWrapper />
         </SmoothScroll>
       </body>
     </html>

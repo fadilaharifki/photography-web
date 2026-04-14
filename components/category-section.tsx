@@ -12,7 +12,6 @@ const SERVICES = [
     subs: ["Prewedding", "Engagement"],
     cursorImage: "https://picsum.photos/id/201/600/600?grayscale",
     bgImage: "https://picsum.photos/id/103/1200/1600",
-    rotate: -3,
   },
   {
     title: "The Union",
@@ -20,7 +19,6 @@ const SERVICES = [
     subs: ["Wedding", "Holy Matrimony"],
     cursorImage: "https://picsum.photos/id/202/600/600?grayscale",
     bgImage: "https://picsum.photos/id/111/1200/1600",
-    rotate: 2,
   },
   {
     title: "The Legacy",
@@ -28,7 +26,6 @@ const SERVICES = [
     subs: ["Maternity", "Family"],
     cursorImage: "https://picsum.photos/id/203/600/600?grayscale",
     bgImage: "https://picsum.photos/id/115/1200/1600",
-    rotate: -2,
   },
 ];
 
@@ -37,17 +34,17 @@ const CustomCursor = ({ mousePosition, activeService }: { mousePosition: { x: nu
 
   return (
     <motion.div
-      className="pointer-events-none fixed z-50 overflow-hidden rounded-full shadow-2xl bg-white p-2"
+      className="pointer-events-none fixed z-50 overflow-hidden rounded-full bg-white p-1 shadow-xl"
       style={{
-        width: 150,
-        height: 150,
-        x: mousePosition.x - 75,
-        y: mousePosition.y - 75,
+        width: 120,
+        height: 120,
+        x: mousePosition.x - 60,
+        y: mousePosition.y - 60,
       }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0, opacity: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      transition={{ type: "spring", stiffness: 400, damping: 30 }}
     >
       <div className="relative w-full h-full rounded-full overflow-hidden">
         <Image
@@ -73,7 +70,7 @@ export default function CategorySection() {
   return (
     <section
       ref={containerRef}
-      className="bg-[#f2f0e8] text-[#1a1a1a] py-32 px-6 font-livvic relative group"
+      className="bg-[#f2f0e8] text-[#1a1a1a] py-32 px-6 font-livvic relative overflow-hidden"
       onMouseMove={handleMouseMove}
       style={{ cursor: activeService ? 'none' : 'default' }}
     >
@@ -88,67 +85,62 @@ export default function CategorySection() {
           <p className="text-[10px] tracking-[0.5em] uppercase text-stone-500 mb-6">
             Explore our collections
           </p>
-          <h2 className="text-4xl md:text-5xl font-light italic leading-tight">
+          <h2 className="text-3xl md:text-4xl font-light italic leading-tight font-soria">
             We exist to capture <span className="text-stone-400">the</span> quiet moments, <br /> ensuring your tale is never forgotten.
           </h2>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-          {SERVICES.map((service, index) => (
-            <motion.div
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {SERVICES.map((service) => (
+            <div
               key={service.slug}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
               onMouseEnter={() => setActiveService(service)}
               onMouseLeave={() => setActiveService(null)}
-              whileHover={{
-                scale: 1.05,
-                rotate: service.rotate,
-                transition: { type: "spring", stiffness: 200, damping: 20 }
-              }}
-              className="relative aspect-[3/4] md:aspect-[3/4] rounded-[4rem] overflow-hidden border-2 border-black/10 transition-colors duration-500 hover:border-black group shadow-sm bg-stone-100"
+              className="relative aspect-[3/4.5] rounded-2xl overflow-hidden group"
             >
-              <div className="absolute inset-0 grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-110 pointer-events-none z-0">
+              <div className="absolute inset-0 z-0">
                 <Image
                   src={service.bgImage}
                   alt={service.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-all duration-[1.5s] ease-out scale-100 group-hover:scale-110 grayscale-[0.8] group-hover:grayscale-0 opacity-40 group-hover:opacity-100"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
 
               <Link
                 href={`/${service.slug}`}
-                className="relative flex flex-col justify-end text-center w-full h-full p-12 z-10 text-white"
+                className="relative flex flex-col justify-end items-center w-full h-full p-10 z-10"
               >
-                <h3 className="text-3xl font-soria italic tracking-tight mb-6">
+                <h3 className="text-xl md:text-2xl font-soria italic tracking-tight mb-4 text-stone-800 group-hover:text-white transition-colors duration-500">
                   {service.title}
                 </h3>
 
-                <AnimatePresence>
-                  {activeService?.slug === service.slug && (
-                    <motion.div
-                      className="flex flex-col gap-2 overflow-hidden"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                      {service.subs.map((sub) => (
-                        <p
-                          key={sub}
-                          className="text-[10px] font-medium tracking-[0.3em] uppercase text-white/80"
-                        >
-                          {sub}
-                        </p>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <div className="h-10 flex flex-col items-center justify-start overflow-hidden">
+                  <AnimatePresence>
+                    {activeService?.slug === service.slug && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.4 }}
+                        className="flex flex-col gap-1 items-center"
+                      >
+                        {service.subs.map((sub) => (
+                          <p
+                            key={sub}
+                            className="text-[9px] font-medium tracking-[0.2em] uppercase text-white/80"
+                          >
+                            {sub}
+                          </p>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

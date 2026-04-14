@@ -37,9 +37,6 @@ export default function Carousel() {
   return (
     <section className="relative z-20 bg-white pt-32 pb-32 overflow-hidden font-livvic">
       <div className="max-w-4xl mx-auto text-center mb-24 px-6">
-        <h2 className="text-4xl md:text-5xl leading-tight text-black font-soria uppercase">
-          Learn from the best
-        </h2>
         <p className="mt-4 text-stone-500 text-[10px] uppercase tracking-[0.4em]">
           Drag to explore our latest stories
         </p>

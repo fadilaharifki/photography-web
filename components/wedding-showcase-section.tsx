@@ -13,14 +13,6 @@ export default function WeddingShowcase() {
   const offerings = [
     {
       id: "01.",
-      slug: "/the-union",
-      title: "WEDDING DAYS",
-      desc: "Our signature service & most popular",
-      img: "https://picsum.photos/id/10/800/1200",
-      style: "uppercase tracking-tighter",
-    },
-    {
-      id: "02.",
       slug: "/the-union/elopement",
       title: "elopement",
       desc: "A very intimate setting for couples",
@@ -28,7 +20,7 @@ export default function WeddingShowcase() {
       style: "italic lowercase",
     },
     {
-      id: "03.",
+      id: "02.",
       slug: "/the-beginning/engagement",
       title: "engagement",
       desc: "Pre wedding bliss and always outdoors",
@@ -107,44 +99,6 @@ export default function WeddingShowcase() {
 
       <section>
         <Carousel />
-      </section>
-      
-      <section className="relative z-30 bg-[#1a1a1a] text-[#f2f0e8] py-40 px-6 md:px-20 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center overflow-hidden">
-        <div className="max-w-xl lg:ml-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="relative w-48 h-64 mb-14 p-3 border border-white/10 group"
-          >
-            <Image 
-              src="https://picsum.photos/id/64/600/800" 
-              fill 
-              className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
-              alt="Reviewer" 
-            />
-          </motion.div>
-          <div className="flex gap-2 mb-10 text-amber-200/80 text-sm">★★★★★</div>
-          <h2 className="text-5xl md:text-7xl font-soria italic mb-12 leading-[1.1] tracking-tight">
-            "I never imagined my photos to be as perfect as they turned out"
-          </h2>
-          <div className="space-y-6">
-            <p className="text-stone-400 text-[10px] leading-[2.2] uppercase tracking-[0.3em] font-livvic font-light max-w-md">
-              Based on a true story of love and light. Every frame captured is a testament to the quiet beauty of existence.
-            </p>
-            <div className="w-12 h-px bg-stone-500"></div>
-            <p className="text-[10px] uppercase tracking-[0.4em] font-bold">The Henderson Tales, 2026</p>
-          </div>
-        </div>
-        
-        <motion.div 
-          initial={{ scale: 1.1, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.6 }}
-          transition={{ duration: 1.5 }}
-          className="relative h-[90vh] w-full rounded-tl-[120px] md:rounded-tl-[240px] overflow-hidden shadow-2xl"
-        >
-          <Image src="https://picsum.photos/id/35/1200/1600" fill className="object-cover" alt="Atmosphere" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1a1a1a]/80"></div>
-        </motion.div>
       </section>
     </div>
   );

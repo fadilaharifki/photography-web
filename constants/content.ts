@@ -1,0 +1,42 @@
+export const CATEGORY_DATA = {
+  "backstory": {
+    title: "Backstory",
+    href: "/backstory",
+    description: "Discover the philosophy and narrative behind Feelm Tales...",
+    services: [],
+    image: "https://picsum.photos/id/64/1200/630",
+    showInNav: false,
+  },
+  "the-beginning": {
+    title: "The Beginning",
+    href: "/the-beginning",
+    description: "Abadikan momen awal perjalanan cinta...",
+    services: ["Prewedding", "Engagement"], 
+    image: "https://picsum.photos/id/103/1200/630",
+    showInNav: true, 
+  },
+  "the-union": {
+    title: "The Union",
+    href: "/the-union",
+    description: "Merayakan janji suci...",
+    services: ["Wedding"],
+    image: "https://picsum.photos/id/111/1200/630",
+    showInNav: true,
+  },
+  "the-legacy": {
+    title: "The Legacy",
+    href: "/the-legacy",
+    description: "Menyimpan memori berharga...",
+    services: ["Maternity", "Family"],
+    image: "https://picsum.photos/id/115/1200/630",
+    showInNav: true,
+  },
+  "connect": {
+    title: "Connect",
+    href: "/connect",
+    description: "Let's start your tale...",
+    services: [],
+    image: "https://picsum.photos/id/101/1200/630",
+    showInNav: false, 
+  },
+} as const;

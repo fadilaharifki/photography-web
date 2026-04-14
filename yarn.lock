@@ -1534,10 +1534,23 @@ next@16.2.0:
     "@next/swc-win32-x64-msvc" "16.2.0"
     sharp "^0.34.5"
 
+nextjs-toploader@^3.9.17:
+  version "3.9.17"
+  resolved "https://registry.yarnpkg.com/nextjs-toploader/-/nextjs-toploader-3.9.17.tgz#3bb54918738c31ac1efbaf6a01518dbee27ebf99"
+  integrity sha512-9OF0KSSLtoSAuNg2LZ3aTl4hR9mBDj5L9s9DZiFCbMlXehyICGjkIz5dVGzuATU2bheJZoBdFgq9w07AKSuQQw==
+  dependencies:
+    nprogress "^0.2.0"
+    prop-types "^15.8.1"
+
 node-releases@^2.0.36:
   version "2.0.36"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.36.tgz#99fd6552aaeda9e17c4713b57a63964a2e325e9d"
   integrity sha512-TdC8FSgHz8Mwtw9g5L4gR/Sh9XhSP/0DEkQxfEFXOpiul5IiHgHan2VhYYb6agDSfp4KuvltmGApc8HMgUrIkA==
+
+nprogress@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
+  integrity sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==
 
 object-assign@^4.1.1:
   version "4.1.1"
@@ -1849,3 +1862,8 @@ zod@^3.24.1:
   version "3.25.76"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.25.76.tgz#26841c3f6fd22a6a2760e7ccb719179768471e34"
   integrity sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==
+
+zustand@^5.0.12:
+  version "5.0.12"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-5.0.12.tgz#ed36f647aa89965c4019b671dfc23ef6c6e3af8c"
+  integrity sha512-i77ae3aZq4dhMlRhJVCYgMLKuSiZAaUPAct2AksxQ+gOtimhGMdXljRT21P5BNpeT4kXlLIckvkPM029OljD7g==

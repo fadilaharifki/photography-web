@@ -18,15 +18,15 @@ export default function FeaturedProject() {
   const springConfig = { stiffness: 120, damping: 40, mass: 0.5 };
   const smoothProgress = useSpring(scrollYProgress, springConfig);
 
-  const yLeft = useTransform(smoothProgress, [0, 1], [-250, 250]);
-  const yRight = useTransform(smoothProgress, [0, 1], [250, -250]);
+  const yLeft = useTransform(smoothProgress, [0, 1], [-500, 500]);
+  const yRight = useTransform(smoothProgress, [0, 1], [500, -500]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     setMousePos({ x: e.clientX, y: e.clientY });
   };
 
   return (
-    <section
+   <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
@@ -38,13 +38,13 @@ export default function FeaturedProject() {
       </Link>
 
       <motion.div
-        className="fixed top-0 left-0 w-32 h-32 bg-black text-white rounded-full flex items-center justify-center text-[10px] font-livvic font-bold tracking-[0.2em] pointer-events-none z-[100] text-center px-4 shadow-2xl"
+        className="fixed top-0 left-0 w-32 h-12 bg-black text-white rounded-full flex items-center justify-center text-[9px] font-livvic font-bold tracking-[0.2em] pointer-events-none z-[100] shadow-2xl"
         animate={{
           x: mousePos.x - 64,
-          y: mousePos.y - 64,
+          y: mousePos.y - 24,
           scale: isHovered ? 1 : 0,
         }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        transition={{ type: "spring", stiffness: 400, damping: 35 }}
       >
         VIEW BACKSTORY
       </motion.div>
@@ -76,7 +76,7 @@ export default function FeaturedProject() {
             alt="Project left image"
             fill
             priority
-            className="object-cover border-[5px] md:border-[10px] border-white"
+            className="object-coverS"
           />
         </div>
       </motion.div>
@@ -90,7 +90,7 @@ export default function FeaturedProject() {
             src="https://picsum.photos/id/102/800/800"
             alt="Project right image"
             fill
-            className="object-cover border-[5px] md:border-[10px] border-white"
+            className="object-cover"
           />
         </div>
       </motion.div>
