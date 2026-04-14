@@ -103,7 +103,7 @@ export default function Details({ title, description, services, category }: Deta
           right: img.right || "auto",
           transform: `rotate(${img.rotate}deg)` 
         }}
-        className="absolute aspect-3/4 shadow-2xl z-0 cursor-pointer"
+        className="absolute aspect-3/4 z-0 cursor-pointer"
         onClick={() => setSelectedImgIndex(index)}
       >
         <div className={`relative ${img.size} aspect-3/4 group overflow-hidden`}>

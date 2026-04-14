@@ -18,6 +18,11 @@ const workSubItems = Object.entries(CATEGORY_DATA)
 
 const NAV_LINKS = [
   { 
+    label: "Home", 
+    href: "/", 
+    clickable: true 
+  },
+  { 
     label: CATEGORY_DATA["backstory"].title, 
     href: CATEGORY_DATA["backstory"].href, 
     clickable: true 
