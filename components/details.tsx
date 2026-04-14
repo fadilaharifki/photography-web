@@ -4,9 +4,10 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Car } from "lucide-react";
 import { useLayoutStore } from "@/store/useLayoutStore";
 import Lightbox from "@/components/lightbox";
+import { Carousel } from "./carousel";
 
 interface DetailsProps {
   title: string;
@@ -59,25 +60,14 @@ export default function Details({ title, description, services, category }: Deta
 
   const carouselItems = [...categoryIds, ...categoryIds].map((id, i) => ({ id, label: `Tales ${i + 1}` }));
 
-  useEffect(() => {
-    setFooterVisibility(false);
-    return () => setFooterVisibility(true);
-  }, [setFooterVisibility]);
+   const rawItems = [
+    { id: 101, label: "Silent Morning", slug: "silent-morning" },
+    { id: 102, label: "The Vow", slug: "the-vow" },
+    { id: 103, label: "Golden Hour", slug: "golden-hour" },
+    { id: 104, label: "Reception", slug: "reception" },
+    { id: 109, label: "The Legacy", slug: "the-legacy" },
+  ];
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-    if (scrollContainerRef.current) {
-      const { left, width } = scrollContainerRef.current.getBoundingClientRect();
-      setCursorDir((e.clientX - left) < width / 2 ? "left" : "right");
-    }
-  };
-
-  const handleCarouselClick = () => {
-    if (scrollContainerRef.current) {
-      const amount = window.innerWidth * 0.3;
-      scrollContainerRef.current.scrollBy({ left: cursorDir === "right" ? amount : -amount, behavior: "smooth" });
-    }
-  };
 
   return (
     <main ref={containerRef} className="bg-[#f2f0e8] text-[#1a1a1a] font-livvic selection:bg-[#EAB308]">
@@ -162,70 +152,8 @@ export default function Details({ title, description, services, category }: Deta
 
       {isSingleService && (
         <section className="relative z-[60] bg-[#f2f0e8] pt-20 pb-40 border-t border-black/5">
-          <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-2 gap-20 mb-40">
-            <h2 className="font-soria text-4xl md:text-6xl italic leading-tight">
-              A single moment, <br /> an eternal union.
-            </h2>
-            
-            <div className="space-y-16">
-              <div className="grid grid-cols-2 gap-10 border-t border-black/10 pt-10">
-                <div>
-                  <p className="text-[9px] tracking-widest uppercase mb-4 text-stone-400 font-bold">Investment</p>
-                  <p className="text-3xl font-soria italic">Starts from 25M</p>
-                </div>
-                <div>
-                  <p className="text-[9px] tracking-widest uppercase mb-4 text-stone-400 font-bold">Deliverables</p>
-                  <p className="text-3xl font-soria italic">Full Day Session</p>
-                </div>
-              </div>
-              <div>
-                <p className="text-[9px] tracking-widest uppercase mb-6 text-stone-400 font-bold">What’s Included</p>
-                <div className="grid grid-cols-2 gap-y-4 text-[10px] uppercase tracking-wider text-stone-600 font-medium">
-                  <p>• 3 Photographers</p>
-                  <p>• Premium Storybook</p>
-                  <p>• all high-res files</p>
-                  <p>• online gallery access</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="px-6 md:px-16 mb-12">
-            <p className="text-[9px] tracking-[0.4em] uppercase text-stone-400 mb-2 font-bold font-livvic">Portfolio Highlights</p>
-            <h3 className="font-soria text-3xl md:text-5xl italic">Visual Narrative</h3>
-          </div>
-
-          <div className="relative group/carousel">
-            <AnimatePresence>
-              {showCursor && (
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="fixed top-0 left-0 pointer-events-none z-[100] w-14 h-14 bg-white text-black rounded-full flex items-center justify-center shadow-xl font-bold" style={{ x: mousePos.x - 28, y: mousePos.y - 28 }}>
-                  {cursorDir === "right" ? <ArrowRight size={20} /> : <ArrowLeft size={20} />}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <div 
-              ref={scrollContainerRef} 
-              onMouseMove={handleMouseMove} onMouseEnter={() => setShowCursor(true)} onMouseLeave={() => setShowCursor(false)} onClick={handleCarouselClick}
-              className="flex gap-6 overflow-x-auto no-scrollbar px-6 md:px-16 cursor-none select-none scroll-smooth"
-            >
-              {carouselItems.map((item, index) => (
-                <div 
-                  key={index} 
-                  className="flex-none w-[80vw] md:w-[28vw] cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedImgIndex(index % categoryIds.length);
-                  }}
-                >
-                  <div className="relative aspect-[3/4] w-full rounded-sm overflow-hidden mb-6">
-                    <Image src={`https://picsum.photos/id/${item.id}/800/1067`} fill className="object-cover transition-transform duration-[1.5s] hover:scale-105" alt="" />
-                  </div>
-                  <p className="text-center text-[10px] tracking-[0.3em] uppercase font-bold text-stone-400">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        
+          <Carousel items={rawItems} category={category} serviceSlug={services[0].toLowerCase().replace(/\s+/g, '-')} />
         </section>
       )}
     </main>

@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { category } = await params;
   const categoryKey = category?.toLowerCase() as keyof typeof CATEGORY_DATA;
   const selectCategory = CATEGORY_DATA[categoryKey];
+  
 
   if (!selectCategory) {
     return { title: "Page Not Found | Feelm Tales" };

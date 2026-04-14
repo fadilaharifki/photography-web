@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -57,8 +57,8 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 font-livvic ${
-        isScrolled ? "bg-[#f2f0e8]/10 backdrop-blur-md border-b border-black/5 py-3 md:py-4 shadow-sm" : "bg-[#f2f0e8]/50 backdrop-blur-[2px] py-5 md:py-8 border-b border-transparent"
+      <nav className={`fixed top-0 left-0 right-0 z-100 transition-all duration-500 font-livvic ${
+        isScrolled ? "bg-[#f2f0e8]/10 border-b border-black/5 p-1 shadow-sm" : "bg-[#f2f0e8]/50 backdrop-blur-[2px] py-5 md:py-8 border-b border-transparent"
       }`}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link href="/" className="relative h-12 w-32 md:h-14 md:w-40 transition-opacity hover:opacity-80">
